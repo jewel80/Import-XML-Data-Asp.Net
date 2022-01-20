@@ -4,11 +4,49 @@
     ViewBag.Title = "Index";
 }
 
+<script type="text/javascript">  
+    $(document).ready(function () {  
+        $('form').validate({  
+            rules: {  
+                xmlFile: {  
+                    required: true  
+                }  
+            },  
+            messages: {  
+                xmlFile: "Choose file to upload",  
+            }  
+        })   
+    });  
+</script> 
+
 <h2>Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+@using (Html.BeginForm("Upload", "Employees", FormMethod.Post, new { enctype = "multipart/form-data" }))  
+{  
+    <div class="row">  
+        <div class="col-sm-1 col-md-6 col-xs-12">  
+            <h5 class="text-danger">@ViewBag.Error</h5>  
+            <h5 class="text-success">@ViewBag.Success</h5>  
+            <div class="form-group">  
+                <label>Choose XML File:</label>  
+                <div class="input-group">  
+                    <div class="custom-file">  
+                        <input id="xmlFile" name="xmlFile" type="file" class="custom-file-input" />  
+                        <label class="custom-file-label"></label>  
+                    </div>  
+                    <div class="input-group-append">  
+                        <input type="submit" class="btn btn-outline-primary" value="Upload" />  
+                    </div>  
+                </div>  
+            </div>  
+        </div>  
+    </div>  
+} 
+
 <table class="table">
     <tr>
         <th>
